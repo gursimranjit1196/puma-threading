@@ -1,25 +1,17 @@
 # README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # puma-parallelism
+
+POC to playaround with puma threads_count's configurations. <br/>
+To see the insight performance of puma threads, change the value of threads_count in puma.rb and rerun rails server and run this code in next terminal(it'll do 20 concurrent hits to local storage endpoint).
+
+```
+target=${1:-http://localhost:3000}
+
+for i in $(seq 20)
+do
+    curl $target > /dev/null &
+done
+```
+
+
+You can see as per your thread_count value in puma.rb file, your requests are served(see server logs).
